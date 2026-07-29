@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>HUB – AI‑Core · iki1uc</title>
+<title>HUB – TEAM‑WORK · iki1uc</title>
 
 <style>
 body { background:#000; color:#0f0; font-family:monospace; padding:40px; }
@@ -12,30 +12,45 @@ pre { background:#000; border-left:3px solid #6cf; padding:15px; white-space:pre
 </style>
 
 <script type="module">
+/* HUB MODULES */
 import { HUB_CORE } from "./HUB.core.js";
 import { HUB_DASHBOARD } from "./HUB.dashboard.js";
 import { HUB_RUNTIME } from "./HUB.runtime.js";
 import { HUB_FUSION } from "./HUB.fusion.js";
 
+/* iki1uc CORE */
 import { NC_QUANTUM } from "../NC/NC_Quantum.js";
 import { PQ_HYPER } from "../PQ/PQ_Hyper.js";
 import { TMP_GHOST } from "../TMP/TMP_Ghost.js";
 import { NET_OVERDRIVE } from "../NET/NET_Overdrive.js";
 
+/* TEAM SYSTEM */
+import { TEAM_BUILD } from "../TEAM/TE.js";
+import { TEAM_DASHBOARD } from "../TEAM/TEAM_Dashboard.js";
+
 (async function(){
 
+    /* CORE INIT */
     const nc = NC_QUANTUM();
     const pq = PQ_HYPER(nc);
     const tmp = TMP_GHOST(pq);
     const net = NET_OVERDRIVE(nc, pq, tmp);
 
+    /* HUB INIT */
     const hub = HUB_CORE(nc, pq, tmp);
 
-    document.getElementById("dashboard").innerText =
+    /* TEAM INIT */
+    const team = TEAM_BUILD(hub, nc, pq, tmp, net, { mode:"active", signal:"bright" });
+
+    /* OUTPUT */
+    document.getElementById("hub-dashboard").innerText =
         JSON.stringify(HUB_DASHBOARD(hub), null, 2);
 
-    document.getElementById("runtime").innerText =
+    document.getElementById("hub-runtime").innerText =
         JSON.stringify(HUB_RUNTIME(nc, pq, tmp, net), null, 2);
+
+    document.getElementById("team-dashboard").innerText =
+        JSON.stringify(TEAM_DASHBOARD(team), null, 2);
 
     document.getElementById("fusion").innerText =
         JSON.stringify(HUB_FUSION(true, true, true, true, true), null, 2);
@@ -47,20 +62,25 @@ import { NET_OVERDRIVE } from "../NET/NET_Overdrive.js";
 
 <body>
 
-<h1>HUB – AI‑Core · iki1uc</h1>
+<h1>HUB – TEAM‑WORK · iki1uc</h1>
 
 <div class="block">
     <div class="title">HUB‑Dashboard</div>
-    <pre id="dashboard"></pre>
+    <pre id="hub-dashboard"></pre>
 </div>
 
 <div class="block">
     <div class="title">HUB‑Runtime</div>
-    <pre id="runtime"></pre>
+    <pre id="hub-runtime"></pre>
 </div>
 
 <div class="block">
-    <div class="title">HUB‑Fusion TEAM + HH + RTH + POOK + KOOP</div>
+    <div class="title">TEAM‑Dashboard</div>
+    <pre id="team-dashboard"></pre>
+</div>
+
+<div class="block">
+    <div class="title">Fusion HUB + TEAM + HH + RTH + POOK + KOOP</div>
     <pre id="fusion"></pre>
 </div>
 
