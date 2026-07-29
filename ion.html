@@ -1,0 +1,10 @@
+export function HUB_FUSION(team, hh, rth, pook, koop){
+    return {
+        team: team ? "OK" : "FEHLT",
+        hh: hh ? "OK" : "FEHLT",
+        rth: rth ? "OK" : "FEHLT",
+        pook: pook ? "OK" : "FEHLT",
+        koop: koop ? "OK" : "FEHLT",
+        fusion: team && hh && rth && pook && koop ? "AKTIV" : "INAKTIV"
+    };
+}
